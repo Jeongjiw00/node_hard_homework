@@ -25,9 +25,8 @@ router.post("/posts", authMiddleware, async (req, res) => {
     await Post.create({ title, content, userId });
     res.status(200).json({ message: "게시글 작성에 성공하였습니다." });
   } catch (err) {
-    res
-      .status(400)
-      .json({ errorMessage: "게시글 작성에 실패하였습니다.", err });
+    console.log(err);
+    res.status(400).json({ errorMessage: "게시글 작성에 실패하였습니다." });
   }
 });
 
