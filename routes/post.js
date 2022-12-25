@@ -14,6 +14,7 @@ const { User, Post, Comment, Like } = require("../models");
 // 게시글 작성
 router.post("/posts", authMiddleware, async (req, res) => {
   try {
+    // console.log(res.locals.user.dataValues);
     const { userId } = res.locals.user.dataValues;
     const { title, content } = req.body;
     if (!title || !content) {
@@ -42,6 +43,7 @@ router.get("/posts", async (req, res, next) => {
         },
       ],
     });
+    // console.log(posts);
     if (posts.length === 0) {
       return res
         .status(404)
@@ -68,7 +70,7 @@ router.get("/post/:postId", async (req, res, next) => {
         },
         {
           model: Comment,
-          attributes: ["content", "createdAt"],
+          attributes: ["comment", "createdAt"],
           include: [
             {
               model: User,
@@ -78,6 +80,7 @@ router.get("/post/:postId", async (req, res, next) => {
         },
       ],
     });
+    // console.log(post);
     res.json({ post });
   } catch (err) {
     console.log(err);

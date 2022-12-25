@@ -52,7 +52,6 @@ router.post("/users", async (req, res) => {
 
     // nickname이 동일한게 이미 있는지 확인하기 위해 가져온다.
     const existsUsers = await User.findOne({ where: { nickname } });
-    console.log(existsUsers);
     if (existsUsers) {
       return res.status(400).send({
         errorMesssage: "중복된 닉네임입니다.",
